@@ -1,23 +1,11 @@
 import React from 'react'
-import { Keyboard, TouchableWithoutFeedback } from 'react-native'
-import * as Device from 'expo-device'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import tailwind from 'tailwind-rn'
 
-export default function InputWrapper(props) {
-
-  const getDeviceType = async () => {
-    return await Device.getDeviceTypeAsync()
-  }
-
-  const dismissKeyboard = async () => {
-    const deviceType = await getDeviceType();
-    if(deviceType !== Device.DeviceType.DESKTOP) {
-      Keyboard.dismiss()
-    }
-  }
-
+export default function InputWrapper (props) {
   return (
-    <TouchableWithoutFeedback onPress={dismissKeyboard}>
-      {props.children}
-    </TouchableWithoutFeedback>
+    <KeyboardAwareScrollView contentContainerStyle={tailwind('flex flex-wrap content-center min-h-full')} extraScrollHeight={150} enableOnAndroid={true}>
+        {props.children}
+    </KeyboardAwareScrollView>
   )
 }

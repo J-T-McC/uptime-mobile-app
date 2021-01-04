@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import tailwind from 'tailwind-rn'
-import SvgLogo from '@/components/svg/SvgLogo'
+import SvgLogo from '~/components/svg/SvgLogo'
 
 export default function Logo() {
   return (

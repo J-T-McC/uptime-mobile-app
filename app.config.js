@@ -26,12 +26,12 @@ export default {
   android: {
     adaptiveIcon: {
       foregroundImage: './assets/adaptive-icon.png',
-      backgroundColor: '#FFFFFF'
+      backgroundColor: '#000000'
     }
   },
   extra: {
     //application env
-    apiEndpoint: 'http://api.laravel.test/api',
-    sanctumEndpoint: 'http://api.laravel.test',
+    apiEndpoint: 'https://uptime-api.tysonmccarney.com/api',
+    sanctumEndpoint: 'https://uptime-api.tysonmccarney.com',
   },
 }
