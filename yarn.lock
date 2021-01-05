@@ -1452,6 +1452,11 @@
     invariant "^2.2.4"
     lodash "^4.5.0"
 
+"@yr/monotone-cubic-spline@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@yr/monotone-cubic-spline/-/monotone-cubic-spline-1.0.3.tgz#7272d89f8e4f6fb7a1600c28c378cc18d3b577b9"
+  integrity sha512-FQXkOta0XBSUPHndIKON2Y9JeQz5ZeMqLYZVVK93FliNBFm7LNMIZmY6FrMEB9XPcDbE2bekMbZD6kzDkxwYjA==
+
 abort-controller@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/abort-controller/-/abort-controller-3.0.0.tgz#eaf54d53b62bae4138e809ca225c8439a6efb392"
@@ -2363,6 +2368,11 @@ deepmerge@^3.2.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.3.0.tgz#d3c47fd6f3a93d517b14426b0628a17b0125f5f7"
   integrity sha512-GRQOafGHwMHpjPx9iCvTgpu9NojZ49q794EEL94JVEw6VaeA8XTUyBKvAkOOjBX9oJNiV6G3P+T+tihFjo2TqA==
+
+deepmerge@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.2.2.tgz#44d2ea3679b8f4d4ffba33f03d865fc1e7bf4955"
+  integrity sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
 
 defaults@^1.0.3:
   version "1.0.3"
@@ -3706,6 +3716,16 @@ lodash._reinterpolate@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
 
+lodash.clamp@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/lodash.clamp/-/lodash.clamp-4.0.3.tgz#5c24bedeeeef0753560dc2b4cb4671f90a6ddfaa"
+  integrity sha1-XCS+3u7vB1NWDcK0y0Zx+Qpt36o=
+
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
+
 lodash.frompairs@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/lodash.frompairs/-/lodash.frompairs-4.0.1.tgz#bc4e5207fa2757c136e573614e9664506b2b1bd2"
@@ -3720,6 +3740,16 @@ lodash.isstring@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
   integrity sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
+
+lodash.maxby@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/lodash.maxby/-/lodash.maxby-4.6.0.tgz#082240068f3c7a227aa00a8380e4f38cf0786e3d"
+  integrity sha1-CCJABo88eiJ6oAqDgOTzjPB4bj0=
+
+lodash.minby@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/lodash.minby/-/lodash.minby-4.6.0.tgz#8b105765ae973954ae944a8029999b8080bdf8c4"
+  integrity sha1-ixBXZa6XOVSulEqAKZmbgIC9+MQ=
 
 lodash.omit@^4.5.0:
   version "4.5.0"
@@ -4674,6 +4704,11 @@ path-parse@^1.0.6:
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
 
+paths-js@^0.4.10, paths-js@^0.4.11:
+  version "0.4.11"
+  resolved "https://registry.yarnpkg.com/paths-js/-/paths-js-0.4.11.tgz#b2a9d5f94ee9949aa8fee945f78a12abff44599e"
+  integrity sha512-3mqcLomDBXOo7Fo+UlaenG6f71bk1ZezPQy2JCmYHy2W2k5VKpP+Jbin9H0bjXynelTbglCqdFhSEkeIkKTYUA==
+
 pify@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
@@ -4719,6 +4754,11 @@ plugin-error@^0.1.2:
     arr-diff "^1.0.1"
     arr-union "^2.0.1"
     extend-shallow "^1.1.2"
+
+point-in-polygon@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/point-in-polygon/-/point-in-polygon-1.0.1.tgz#d59b64e8fee41c49458aac82b56718c5957b2af7"
+  integrity sha1-1Ztk6P7kHElFiqyCtWcYxZV7Kvc=
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
@@ -4872,6 +4912,15 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
+react-native-chart-kit@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-chart-kit/-/react-native-chart-kit-6.9.0.tgz#dca879f311c96a4d05f2298d09ca7930a5f7bd83"
+  integrity sha512-wWIsTbfP5D6vRVxKdBcZHByPHCjbb+ohl/mA5JGAEMARuAuUz2MU060+NZqd3XLHnlZH2PMF9/I5iljwZgfrPA==
+  dependencies:
+    lodash "^4.17.13"
+    paths-js "^0.4.10"
+    point-in-polygon "^1.0.1"
+
 react-native-fast-toast@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-native-fast-toast/-/react-native-fast-toast-2.2.0.tgz#a94100180d3fd4f91499970e0a42886dfee4351e"
@@ -4906,6 +4955,19 @@ react-native-reanimated@~1.13.0:
   integrity sha512-O+WhgxSjOIzcVdAAvx+h2DY331Ek1knKlaq+jsNLpC1fhRy9XTdOObovgob/aF2ve9uJfPEawCx8381g/tUJZQ==
   dependencies:
     fbjs "^1.0.0"
+
+react-native-responsive-linechart@^5.4.1:
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-responsive-linechart/-/react-native-responsive-linechart-5.4.1.tgz#f8b727fc59694a8723133ebc20a6739959d2f889"
+  integrity sha512-V8dL5KiFia7h1YcLHORJvue1Y/9FW+7xYiOP1OF7XDbXjAnGTN5Z7Dy7OEbk6wLtcFU38s21yNybZhFNp79vrQ==
+  dependencies:
+    "@yr/monotone-cubic-spline" "^1.0.3"
+    deepmerge "^4.2.2"
+    lodash.clamp "^4.0.3"
+    lodash.clonedeep "^4.5.0"
+    lodash.maxby "^4.6.0"
+    lodash.minby "^4.6.0"
+    paths-js "^0.4.11"
 
 react-native-safe-area-context@3.1.9:
   version "3.1.9"
