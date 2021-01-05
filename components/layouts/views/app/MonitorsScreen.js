@@ -3,15 +3,15 @@ import { View, Text, Keyboard } from 'react-native'
 import InputWrapper from '~/components/form/InputWrapper'
 import tailwind from 'tailwind-rn'
 
-export default function DashboardScreen ({ navigation }) {
+export default function MonitorsScreen ({ navigation }) {
 
   return (
     <InputWrapper>
-        <View style={tailwind('p-6 max-w-sm w-full h-full bg-white rounded-md')}>
-          <View>
-            <Text>Dashboard</Text>
-          </View>
+      <View style={tailwind('p-6 max-w-sm w-full h-full bg-white rounded-md')}>
+        <View>
+          <Text>Monitors</Text>
         </View>
+      </View>
     </InputWrapper>
   )
 }
