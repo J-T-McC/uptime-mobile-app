@@ -6,25 +6,36 @@ import TrendChart from '~/components/charts/TrendChart'
 import { getTrended, getPast90Days } from '~/services/ChartService'
 import PieChart from '~/components/charts/PieChart'
 import RecentMonitors from '~/components/layouts/views/sections/RecentMonitors'
-
-import { useStyleSheet } from '@ui-kitten/components'
+import ResourceService from '~/services/ResourceService'
+import { useStyleSheet, Icon, Text } from '@ui-kitten/components'
+import {appTheme} from '~/theme/app'
 import themeStyleMap from '~/services/ThemeService'
 
-export default function DashboardScreen ({ navigation }) {
+export default function MonitorScreen ({route}) {
 
+  const monitorId = route.params.monitorId
   const themeStyles = useStyleSheet(themeStyleMap)
-
   const [trendData, setTrendData] = useState([])
   const [pieData, setPieData] = useState([])
+  const [monitor, setMonitor] = useState([])
+  const [scrolledBottom, setScrolledBottom] = useState(0)
+  const pulseIconRef = React.useRef();
 
   useEffect(() => {
-    getTrended().then((dataset) => {
+    getTrended( monitorId).then((dataset) => {
       setTrendData(dataset)
     })
 
-    getPast90Days().then((dataset) => {
+    getPast90Days(monitorId).then((dataset) => {
       setPieData(dataset)
     })
+
+    ResourceService('monitors').show(monitorId).then(({ data }) => {
+      setMonitor(data.data[0] ?? [])
+    })
+
+    pulseIconRef.current.startAnimation();
+
   }, [])
 
   const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
@@ -33,7 +44,16 @@ export default function DashboardScreen ({ navigation }) {
       contentSize.height - paddingToBottom
   }
 
-  const [scrolledBottom, setScrolledBottom] = useState(0)
+  const getPulseClass = (status) => {
+    switch (status) {
+      case 'up' :
+        return appTheme['color-success-500']
+      case 'down':
+        return appTheme['color-danger-500']
+      default:
+        return appTheme['color-basic-400']
+    }
+  }
 
   return (
     <ScrollView
@@ -42,8 +62,23 @@ export default function DashboardScreen ({ navigation }) {
           setScrolledBottom(scrolledBottom+1)
         }
       }}
-      scrollEventThrottle={2000}
+      scrollEventThrottle={200}
       style={{...tailwind('min-h-full'), ...themeStyles.screen}}>
+
+      <Container header="Monitor">
+        <View style={tailwind('flex flex-row content-center pb-3 pl-3')}>
+          <Icon
+            ref={pulseIconRef}
+            animation='pulse'
+            animationConfig={{ cycles: Infinity }}
+            name='checkmark-circle-outline'
+            fill={getPulseClass(monitor.uptime_status)}
+            width={25}
+            height={25}
+          />
+          <Text style={tailwind('text-lg ml-3')}>{monitor.url}</Text>
+        </View>
+      </Container>
 
       <Container header="Past 90 days Uptime">
         <PieChart dataset={pieData}/>
@@ -55,7 +90,7 @@ export default function DashboardScreen ({ navigation }) {
 
       <View>
         <Container header="Recent Events">
-          <RecentMonitors scrolledBottom={scrolledBottom}/>
+          <RecentMonitors monitorId={monitorId} scrolledBottom={scrolledBottom}/>
         </Container>
       </View>
 

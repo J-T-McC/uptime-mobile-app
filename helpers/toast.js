@@ -1,9 +1,10 @@
 /**
  * Toast a message based on the different variations of laravel responses
- * @param result
- * @returns {string | number}
+ * @param toast - toast hook
+ * @param result - http request result
+ * @returns {*}
  */
-export default function toastMessage (result) {
+export default function toastAPIResponse (toast, result) {
 
   //error
   if (result?.response?.data?.errors) {
@@ -28,9 +29,9 @@ export default function toastMessage (result) {
   if (result?.data?.message) {
     return toast.show(result.data.message, { type: 'info' })
   }
-  //
-  // if (result?.message) {
-  //   toast.show(result.message, { type: 'info' })
-  // }
+
+  if (result?.message) {
+    toast.show(result.message, { type: 'info' })
+  }
 }
 

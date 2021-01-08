@@ -7,7 +7,6 @@ export default {
   name: 'Uptime Mobile Application',
   slug: 'uptime-mobile-application',
   version: '1.0.0',
-  orientation: 'portrait',
   icon: './assets/icon.png',
   splash: {
     'image': './assets/splash.png',
@@ -33,5 +32,8 @@ export default {
     //application env
     apiEndpoint: 'https://uptime-api.tysonmccarney.com/api',
     sanctumEndpoint: 'https://uptime-api.tysonmccarney.com',
+
+    // apiEndpoint: 'http://api.laravel.test/api',
+    // sanctumEndpoint: 'http://api.laravel.test',
   },
 }

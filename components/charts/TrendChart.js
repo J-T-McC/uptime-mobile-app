@@ -1,10 +1,16 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Area, Chart, HorizontalAxis, Line, Tooltip, VerticalAxis } from 'react-native-responsive-linechart'
 import { Dimensions, View } from 'react-native'
+
+import {ThemeContext} from '~/context/ThemeContext'
 
 export default function TrendChart (props) {
 
   const dataset = props.dataset ?? []
+
+  const current = useContext(ThemeContext)
+
+  const labelColor = current.theme === 'light' ? 'black' : 'white'
 
   return (
     <View>
@@ -12,11 +18,16 @@ export default function TrendChart (props) {
       <Chart
         style={{ height: 200, width: Dimensions.get('window').width }}
         data={dataset}
-        padding={{ left: 40, bottom: 20, right: 30, top: 20 }}
-        yDomain={{ min: 50, max: 100 }}
-      >
+        padding={{ left: 50, bottom: 20, right: 30, top: 20 }}
+        yDomain={{ min: 50, max: 100 }}>
         <VerticalAxis tickCount={5} theme={{
-          labels: { formatter: (v) => v.toFixed(0) + '%' },
+          labels: {
+            formatter: (v) => v.toFixed(0) + '%',
+            label: {
+              color: labelColor,
+              dx: -10
+            }
+          },
           ticks: { visible: false },
           grid: { visible: false },
         }}/>

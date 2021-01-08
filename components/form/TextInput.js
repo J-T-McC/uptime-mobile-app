@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, View, TextInput as RNTextInput } from 'react-native'
+import { View } from 'react-native'
+import { Text, Input } from '@ui-kitten/components'
 
 import tailwind from 'tailwind-rn'
 
@@ -10,9 +11,9 @@ export default function TextInput (props: {
   return (
     <View>
       <Text style={tailwind('text-sm')}>{props.label}</Text>
-      <RNTextInput
+      <Input
         {...props.inputProps}
-        style={tailwind('w-full mt-2 rounded-md border-gray-300 h-10 p-2 mb-4 border')}
+        style={tailwind('h-10 mb-4 mt-2')}
       />
     </View>
   )

@@ -1,4 +1,4 @@
-import ApiService, { setAuthToken } from '~/services/ApiService'
+import ApiService, { setAuthToken, setErrorHandler } from '~/services/ApiService'
 
 export default function AuthService() {
 
@@ -59,6 +59,7 @@ export default function AuthService() {
     updatePassword,
     checkIfAuthenticated,
     resendVerificationEmail,
-    setAuthenticationToken
+    setAuthenticationToken,
+    setErrorHandler
   }
 }

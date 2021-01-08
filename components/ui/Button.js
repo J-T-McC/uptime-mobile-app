@@ -1,6 +1,7 @@
 import React from 'react'
-import { TouchableOpacity, Text } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import tailwind from 'tailwind-rn'
+import { Text } from '@ui-kitten/components'
 
 export default function (props) {
   return (

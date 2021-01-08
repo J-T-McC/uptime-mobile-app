@@ -21,10 +21,13 @@ ApiService.interceptors.request.use((request) =>  {
 })
 
 const setAuthToken = (token = '') => {
-  console.log('setting token to', token)
   ApiService.defaults.headers['Authorization'] = `Bearer ${token}`
+}
+
+const setErrorHandler = (fn) => {
+  ApiService.interceptors.request.use((response) => response, (error) => fn(error))
 }
 
 export default ApiService
 
-export { setAuthToken }
+export { setAuthToken, setErrorHandler }

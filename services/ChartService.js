@@ -2,9 +2,11 @@ import ResourceService from '~/services/ResourceService'
 
 const trendResource = ResourceService('event-counts-trended')
 
-const getTrended = async (method = 'index', resourceID = null) => {
+const getTrended = async (resourceID = null) => {
+  const method = resourceID ? 'show' : 'index'
   const { data } = await trendResource[method](resourceID)
   const formattedData = []
+  data.reverse()
   data.forEach((series, index) => {
     formattedData.push({
       x: index,
@@ -25,7 +27,8 @@ const backgroundColors = {
   Up: '#60A5FA',
 }
 
-const getPast90Days = async (method = 'index', resourceID = null) => {
+const getPast90Days = async (resourceID = null) => {
+  const method = resourceID ? 'show' : 'index'
   const { data } = await pieResource[method](resourceID)
   const formattedData = []
   data.forEach((series, index) => {
@@ -38,7 +41,6 @@ const getPast90Days = async (method = 'index', resourceID = null) => {
     })
   })
 
-  console.log(formattedData)
   return formattedData
 }
 
