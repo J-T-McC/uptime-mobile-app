@@ -59,7 +59,7 @@ export default function RecentMonitors (props: {
     <View>
       <Text
         style={tailwind('text-lg font-semibold')}
-        onPress={() => navigation.navigate('Monitor', {monitorId: item.monitor.id})}>{item.monitor.url}
+        onPress={() => navigation.navigate('NestedNavs', {screen: 'Monitor', params: {monitorId: item.monitor.id}})}>{item.monitor.url}
       </Text>
       <View>
         <Text

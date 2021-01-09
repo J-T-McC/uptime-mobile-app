@@ -5,6 +5,9 @@ import { StyleService, useStyleSheet } from '@ui-kitten/components'
  */
 
 const themeStyleMap = StyleService.create({
+  svg: {
+    fill: 'text-basic-color'
+  },
   header: {
     headerTintColor: 'text-basic-color',
   },

@@ -36,7 +36,7 @@ export default function MonitorScreen ({route}) {
 
     pulseIconRef.current.startAnimation();
 
-  }, [])
+  }, [monitorId])
 
   const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
     const paddingToBottom = 100
@@ -65,7 +65,7 @@ export default function MonitorScreen ({route}) {
       scrollEventThrottle={200}
       style={{...tailwind('min-h-full'), ...themeStyles.screen}}>
 
-      <Container header="Monitor">
+      <Container>
         <View style={tailwind('flex flex-row content-center pb-3 pl-3')}>
           <Icon
             ref={pulseIconRef}

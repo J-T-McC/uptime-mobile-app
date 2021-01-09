@@ -13,7 +13,8 @@ export default function Container (props) {
 
   return (
     <View style={{...tailwind('w-full rounded-md mt-3'), ...themeStyles.container}}>
-      <View style={{
+
+      {props.header && <View style={{
         ...tailwind('p-5 border-b border-gray-100'),
         shadowColor: '#222',
         shadowOffset: {
@@ -30,7 +31,7 @@ export default function Container (props) {
             {props.header}
           </Text>
         </View>
-      </View>
+      </View>}
 
       {props.children &&
       <View style={tailwind('flex flex-wrap justify-center mt-3')}>
