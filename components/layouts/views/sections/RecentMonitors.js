@@ -6,20 +6,24 @@ import tailwind from 'tailwind-rn'
 import moment from 'moment'
 import { Spinner, Text, Icon, useStyleSheet } from '@ui-kitten/components'
 import themeStyleMap from '~/services/ThemeService'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function RecentMonitors (props: {
   monitorId?: null,
   scrolledBottom?: 0,
+  renderKey?: null,
 }) {
 
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   const themeStyles = useStyleSheet(themeStyleMap)
   const [recentEvents, setRecentEvents] = useState([])
   const [paginationMeta, setPaginationMeta] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(false)
+  const [reloadCount, setReloadCount] = useState(0)
   const recentEventsResource = ResourceService('latest-monitor-events')
+  const insets = useSafeAreaInsets()
 
   const loadRecentEvents = async (params) => {
     setLoading(true)
@@ -36,10 +40,17 @@ export default function RecentMonitors (props: {
   }
 
   useEffect(() => {
+    setRecentEvents([])
+    setPaginationMeta(null)
+    setCurrentPage(1)
+    setReloadCount(reloadCount + 1)
+  }, [props.renderKey])
+
+  useEffect(() => {
     if (!loading && (!paginationMeta || hasMoreResources())) {
       loadRecentEvents({ page: currentPage })
     }
-  }, [currentPage])
+  }, [currentPage, reloadCount])
 
   useEffect(() => {
     setCurrentPage(currentPage + 1)
@@ -49,17 +60,20 @@ export default function RecentMonitors (props: {
 
   const eventToIconMap = {
     'CERTIFICATE-VALID': (<Icon width={iconSize} height={iconSize} name='shield-off-outline' fill='#FBBF24'/>),
-    'CERTIFICATE-INVALID': (<Icon width={iconSize} height={iconSize}  name='shield-off-outline' fill='#F87171'/>),
-    'CERTIFICATE-EXPIRED': (<Icon width={iconSize} height={iconSize}  name='shield-off-outline' fill='#F87171'/>),
-    'UPTIME-RECOVERED': (<Icon name="arrow-circle-up-outline" width={iconSize} height={iconSize}  fill='#60A5FA'/>),
-    'UPTIME-OFFLINE': (<Icon name="arrow-circle-down-outline" width={iconSize} height={iconSize}  fill='#F87171'/>),
+    'CERTIFICATE-INVALID': (<Icon width={iconSize} height={iconSize} name='shield-off-outline' fill='#F87171'/>),
+    'CERTIFICATE-EXPIRED': (<Icon width={iconSize} height={iconSize} name='shield-off-outline' fill='#F87171'/>),
+    'UPTIME-RECOVERED': (<Icon name="arrow-circle-up-outline" width={iconSize} height={iconSize} fill='#60A5FA'/>),
+    'UPTIME-OFFLINE': (<Icon name="arrow-circle-down-outline" width={iconSize} height={iconSize} fill='#F87171'/>),
   }
 
   const title = (item) => (
     <View>
       <Text
         style={tailwind('text-lg font-semibold')}
-        onPress={() => navigation.navigate('NestedNavs', {screen: 'Monitor', params: {monitorId: item.monitor.id}})}>{item.monitor.url}
+        onPress={() => navigation.navigate('NestedNavs', {
+          screen: 'Monitor',
+          params: { monitorId: item.monitor.id }
+        })}>{item.monitor.url}
       </Text>
       <View>
         <Text
@@ -71,7 +85,7 @@ export default function RecentMonitors (props: {
 
   const description = (text) => (
     <View style={tailwind('pr-3')}>
-      <View style={{...tailwind('p-3 rounded mt-2'), ...themeStyles.quote}}>
+      <View style={{ ...tailwind('p-3 rounded mt-2'), ...themeStyles.quote }}>
         <Text>"{text}"</Text>
       </View>
     </View>
@@ -87,8 +101,8 @@ export default function RecentMonitors (props: {
   )
 
   return (
-    <View>
-      {recentEvents.map(renderItem)}
+    <View key={props.renderKey} style={{ paddingBottom: insets.bottom }}>
+      {recentEvents.length > 0 && recentEvents.map(renderItem)}
       {loading && paginationMeta && <View style={tailwind('flex flex-row justify-center')}>
         <Spinner/>
       </View>}

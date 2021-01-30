@@ -1,13 +1,13 @@
 import React from 'react'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import DashboardScreen from '~/components/layouts/views/app/DashboardScreen'
 import MonitorsScreen from '~/components/layouts/views/app/MonitorsScreen'
 import MonitorScreen from '~/components/layouts/views/app/MonitorScreen'
 import ChannelsScreen from '~/components/layouts/views/app/ChannelsScreen'
-import { Drawer, DrawerItem, Icon, IndexPath, Divider, Button, Text, useStyleSheet } from '@ui-kitten/components'
+import { Drawer, DrawerItem, Icon, IndexPath, Divider, useStyleSheet } from '@ui-kitten/components'
 import { View } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import { createStackNavigator } from '@react-navigation/stack';
-
+import { createStackNavigator } from '@react-navigation/stack'
 import themeStyleMap from '~/services/ThemeService'
 import tailwind from 'tailwind-rn'
 import Logo from '~/components/ui/Logo'
@@ -20,6 +20,7 @@ export default function AppNav () {
 
   const themeStyles = useStyleSheet(themeStyleMap)
   const Auth = useAuthContext()
+  const insets = useSafeAreaInsets();
 
   const Icons = {
     dashboard: (props) => (<Icon {...props} name='home-outline'/>),
@@ -30,7 +31,7 @@ export default function AppNav () {
 
   const Header = () => (
     <React.Fragment>
-      <View style={{ ...tailwind('flex flex-row justify-center p-5'), ...themeStyles.container }}>
+      <View style={{ ...tailwind('flex flex-row justify-center p-5'), ...themeStyles.container, paddingTop: insets.top }}>
         <Logo/>
       </View>
       <Divider/>
@@ -52,7 +53,7 @@ export default function AppNav () {
   const headerOptions = {
     headerShown: true,
     headerStyle: { ...themeStyles.container },
-    ...themeStyles.header,
+    ...themeStyles.header
   }
 
   const NestedNavs = () => (
@@ -64,7 +65,8 @@ export default function AppNav () {
           headerLeft: (props) => (
             <View style={tailwind('flex items-center ml-3')}>
               <View style={tailwind('flex flex-row')}>
-                <Icon {...themeStyles.svg} name='arrow-back-outline' height={25} width={25} onPress={() => navigation.goBack()} />
+                <Icon {...themeStyles.svg} name='arrow-back-outline' height={25} width={25}
+                      onPress={() => navigation.goBack()}/>
               </View>
             </View>
           ),

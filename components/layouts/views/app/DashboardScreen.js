@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { ScrollView, View } from 'react-native'
-import tailwind from 'tailwind-rn'
+import React, { useState, useEffect, useCallback } from 'react'
+import { ScrollView, View, RefreshControl } from 'react-native'
 import Container from '~/components/ui/Container'
 import TrendChart from '~/components/charts/TrendChart'
 import { getTrended, getPast90Days } from '~/services/ChartService'
@@ -16,16 +15,32 @@ export default function DashboardScreen ({ navigation }) {
 
   const [trendData, setTrendData] = useState([])
   const [pieData, setPieData] = useState([])
+  const [refreshing, setRefreshing] = useState(false)
+  const [screenKey, setScreenKey] = useState(Math.random().toString())
+  const [scrolledBottom, setScrolledBottom] = useState(0)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    setScreenKey(Math.random().toString())
+  }, [])
 
   useEffect(() => {
-    getTrended().then((dataset) => {
+
+    const trended = getTrended().then((dataset) => {
       setTrendData(dataset)
     })
 
-    getPast90Days().then((dataset) => {
+    const past90Days = getPast90Days().then((dataset) => {
       setPieData(dataset)
     })
-  }, [])
+
+    Promise.all(trended, past90Days).then(() => {
+      setRefreshing(false)
+    }).catch(() => {
+
+    })
+
+  }, [screenKey])
 
   const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
     const paddingToBottom = 100
@@ -33,17 +48,16 @@ export default function DashboardScreen ({ navigation }) {
       contentSize.height - paddingToBottom
   }
 
-  const [scrolledBottom, setScrolledBottom] = useState(0)
-
   return (
     <ScrollView
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
       onScroll={({ nativeEvent }) => {
         if (isCloseToBottom(nativeEvent)) {
-          setScrolledBottom(scrolledBottom+1)
+          setScrolledBottom(scrolledBottom + 1)
         }
       }}
       scrollEventThrottle={2000}
-      style={{...tailwind('min-h-full'), ...themeStyles.screen}}>
+      style={themeStyles.screen}>
 
       <Container header="Past 90 days Uptime">
         <PieChart dataset={pieData}/>
@@ -55,10 +69,9 @@ export default function DashboardScreen ({ navigation }) {
 
       <View>
         <Container header="Recent Events">
-          <RecentMonitors scrolledBottom={scrolledBottom}/>
+          <RecentMonitors renderKey={screenKey} scrolledBottom={scrolledBottom}/>
         </Container>
       </View>
-
     </ScrollView>
   )
 }
